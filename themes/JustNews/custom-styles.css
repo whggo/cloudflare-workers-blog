@@ -1,0 +1,332 @@
+  <style>
+  .view-count {
+    color: #666;
+    font-size: 14px;
+  }
+  .view-count em {
+    font-style: normal;
+    margin-right: 5px;
+  }
+  .view-count i {
+    font-style: normal;
+    color: #ff5722;
+    font-weight: bold;
+  }
+  
+  /* 搜索框样式 - 桌面端 */
+  .search-box {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    margin-right: 15px;
+    height: 40px;
+    vertical-align: middle;
+    margin-top: -10px; /* 向上移动5px */
+  }
+
+#searchForm {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  height: 100%; /* 继承父容器高度 */
+}
+
+#searchInput {
+  padding: 8px 15px; /* 增加上下内边距 */
+  border: 1px solid #ddd;
+  border-radius: 4px 0 0 4px;
+  outline: none;
+  width: 250px; /* 加长搜索框 */
+  font-size: 14px;
+  transition: all 0.2s ease;
+  background: white;
+  height: 36px; /* 设置固定高度 */
+  box-sizing: border-box; /* 确保padding不影响总高度 */
+}
+
+#searchInput:focus {
+  border-color: #007cba;
+  background: #f8f9fa;
+}
+
+#searchInput::placeholder {
+  color: #999;
+  font-size: 13px;
+}
+
+#searchForm button {
+  padding: 8px 16px; /* 调整按钮内边距 */
+  background: #007cba;
+  color: white;
+  border: 1px solid #007cba;
+  border-radius: 0 4px 4px 0;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: normal;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  height: 36px; /* 与输入框保持一致高度 */
+  box-sizing: border-box; /* 确保padding不影响总高度 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#searchForm button:hover {
+  background: #005a87;
+  border-color: #005a87;
+}
+
+/* 搜索结果下拉框样式 */
+#searchResults {
+  display: none;
+  position: absolute;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+  max-height: 400px; /* 增加最大高度 */
+  overflow-y: auto;
+  z-index: 1000;
+  width: 700px; /* 增加到700px宽度 */
+  margin-top: 5px;
+  left: 0;
+  top: 100%;
+}
+  
+/* 移动端搜索框 */
+.mobile-search-box {
+  display: none; /* 默认隐藏 */
+  margin: 5px 0;
+  padding: 0 5px;
+  position: relative; /* 新增 */
+  top: -10px; /* 新增：向上移动10像素 */
+}
+  
+  .mobile-search-box .search-form {
+    display: flex;
+    width: 100%;
+  }
+  
+  .mobile-search-box #mobileSearchInput {
+    flex: 1;
+    padding: 10px 15px;
+    border: 1px solid #ddd;
+    border-radius: 25px 0 0 25px;
+    outline: none;
+    font-size: 14px;
+    background: #f8f9fa;
+  }
+  
+  .mobile-search-box #mobileSearchInput:focus {
+    border-color: #007cba;
+    background: white;
+  }
+  
+  .mobile-search-box .search-btn {
+    padding: 10px 20px;
+    background: #007cba;
+    color: white;
+    border: 1px solid #007cba;
+    border-radius: 0 25px 25px 0;
+    cursor: pointer;
+    font-size: 14px;
+    white-space: nowrap;
+  }
+  
+  .mobile-search-results {
+    display: none;
+    position: absolute;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    max-height: 300px;
+    overflow-y: auto;
+    z-index: 1000;
+    width: calc(100% - 30px);
+    margin-top: 5px;
+    left: 15px;
+  }
+  
+  .search-result-item {
+    padding: 10px 15px;
+    border-bottom: 1px solid #f0f0f0;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  .search-result-item:hover {
+    background-color: #f8f9fa;
+  }
+  
+  .search-result-title {
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #333;
+    font-size: 14px;
+    line-height: 1.4;
+  }
+  
+  .search-result-snippet {
+    font-size: 12px;
+    color: #666;
+    line-height: 1.4;
+    margin-bottom: 5px;
+  }
+  
+  .search-result-date {
+    font-size: 11px;
+    color: #999;
+  }
+  
+  .search-no-results {
+    padding: 20px;
+    text-align: center;
+    color: #999;
+    font-size: 14px;
+  }
+  
+  #searchResults {
+    display: none;
+    position: absolute;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    max-height: 300px;
+    overflow-y: auto;
+    z-index: 1000;
+    width: 250px;
+    margin-top: 5px;
+    left: 0;
+  }
+  
+  /* 修改后的广告位基础样式 */
+  .ad-container {
+    margin: 0;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    background: white;
+    transition: all 0.3s ease;
+    border: 1px solid #eaeaea;
+  }
+  
+  .ad-container:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+  }
+  
+  .ad-link {
+    display: block;
+    position: relative;
+    text-decoration: none;
+    color: inherit;
+  }
+  
+  .ad-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.3s ease;
+  }
+  
+  .ad-link:hover .ad-image {
+    transform: scale(1.02);
+  }
+  
+  .ad-badge {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+    color: white;
+    padding: 4px 12px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    box-shadow: 0 2px 8px rgba(255,107,107,0.3);
+  }
+  
+  /* 响应式设计 */
+  @media (min-width: 768px) {
+    /* 桌面端：显示导航栏搜索框，隐藏移动端搜索框 */
+    .search-box {
+      display: inline-block !important;
+    }
+    .mobile-search-box {
+      display: none !important;
+    }
+  }
+  
+  @media (max-width: 767px) {
+    /* 移动端：隐藏导航栏搜索框，显示移动端搜索框 */
+    .search-box {
+      display: none !important;
+    }
+    .mobile-search-box {
+      display: block !important;
+    }
+    
+    .ad-container {
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    
+    .ad-container:hover {
+      transform: none;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+    }
+    
+    .ad-badge {
+      top: 8px;
+      right: 8px;
+      padding: 3px 10px;
+      font-size: 11px;
+    }
+  }
+  
+  @media (max-width: 576px) {
+    .mobile-search-box #mobileSearchInput {
+      padding: 8px 12px;
+      font-size: 13px;
+    }
+    
+    .mobile-search-box .search-btn {
+      padding: 8px 15px;
+      font-size: 13px;
+    }
+  }
+  
+  /* 暗色模式支持 */
+  @media (prefers-color-scheme: dark) {
+    .ad-container {
+      background: #2d3748;
+      border-color: #4a5568;
+    }
+    
+    .search-result-item {
+      border-bottom-color: #4a5568;
+    }
+    
+    .search-result-item:hover {
+      background-color: #2d3748;
+    }
+    
+    #searchInput, #mobileSearchInput {
+      background: #2d3748;
+      border-color: #4a5568;
+      color: #e2e8f0;
+    }
+    
+    #searchInput:focus, #mobileSearchInput:focus {
+      border-color: #007cba;
+      background: #1a202c;
+    }
+    
+    #searchResults, .mobile-search-results {
+      background: #1a202c;
+      border-color: #4a5568;
+      color: #e2e8f0;
+    }
+  }
+</style>
